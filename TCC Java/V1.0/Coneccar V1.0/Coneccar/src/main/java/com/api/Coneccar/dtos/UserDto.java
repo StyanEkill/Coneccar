@@ -67,7 +67,4 @@ public class UserDto {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
