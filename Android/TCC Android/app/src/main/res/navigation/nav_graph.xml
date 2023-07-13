@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/Login">
+
+    <fragment
+        android:id="@+id/Login"
+        android:name="com.example.tcc10.AcessoFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_acesso">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/Cadastro" />
+    </fragment>
+    <fragment
+        android:id="@+id/Cadastro"
+        android:name="com.example.tcc10.SecondFragment"
+        android:label="Cadastro"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/Login" />
+    </fragment>
+</navigation>
