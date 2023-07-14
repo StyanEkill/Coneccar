@@ -1,8 +1,9 @@
 package com.api.Coneccar.controllers;
 
 import com.api.Coneccar.dtos.UserDto;
-import com.api.Coneccar.dtos.models.UserModel;
+import com.api.Coneccar.model.UserModel;
 import com.api.Coneccar.services.UserService;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class UserController {
         if (!userModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
-            return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
     }
 
     @DeleteMapping("/{id}")
@@ -53,8 +54,8 @@ public class UserController {
         if (!userModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
-            userService.delete(userModelOptional.get());
-            return ResponseEntity.status(HttpStatus.OK).body("O usuário foi deletado");
+        userService.delete(userModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("O usuário foi deletado");
     }
 
     @PutMapping("/{id}")
@@ -63,9 +64,11 @@ public class UserController {
         if (!userModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
         }
-            var userModel = new UserModel();
-            BeanUtils.copyProperties(userDto, userModel);
-            userModel.setId(userModelOptional.get().getId());
-            return  ResponseEntity.status(HttpStatus.OK).body(userService.save(userModel));
+        var userModel = new UserModel();
+        BeanUtils.copyProperties(userDto, userModel);
+        userModel.setId(userModelOptional.get().getId());
+        return  ResponseEntity.status(HttpStatus.OK).body(userService.save(userModel));
     }
+
+
 }

@@ -1,6 +1,6 @@
 package com.api.Coneccar.repositories;
 
-import com.api.Coneccar.dtos.models.UserModel;
+import com.api.Coneccar.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

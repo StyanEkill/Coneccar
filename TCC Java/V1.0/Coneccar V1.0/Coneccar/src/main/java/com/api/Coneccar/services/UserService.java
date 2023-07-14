@@ -1,6 +1,6 @@
 package com.api.Coneccar.services;
 
-import com.api.Coneccar.dtos.models.UserModel;
+import com.api.Coneccar.model.UserModel;
 import com.api.Coneccar.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -33,6 +33,6 @@ public class UserService {
     }
     @Transactional
     public void delete(UserModel userModel) {
-       userRepository.delete(userModel );
+        userRepository.delete(userModel );
     }
 }
