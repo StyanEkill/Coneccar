@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Car")
+@Table(name = "Carro")
 public class Carro implements Serializable {
 
     @Id
