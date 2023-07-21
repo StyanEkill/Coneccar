@@ -1,7 +1,7 @@
 package com.api.Coneccar.services;
 
-import com.api.Coneccar.model.UserModel;
-import com.api.Coneccar.repositories.UserRepository;
+import com.api.Coneccar.model.User;
+import com.api.Coneccar.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +10,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class UserService {
-    final UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
+public class UsuarioService {
+    final UsuarioRepository userRepository;
+    public UsuarioService(UsuarioRepository userRepository) {
         this.userRepository = userRepository;
     }
     @Transactional
-    public UserModel save(UserModel userModel) {
-        return userRepository.save(userModel);
+    public User save(User user) {
+        return userRepository.save(user);
     }
     public boolean existsByCpf(String cpf) {
         return userRepository.existsByCpf(cpf);
@@ -25,14 +25,14 @@ public class UserService {
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
-    public List<UserModel> findAll() {
+    public List<User> findAll() {
         return userRepository.findAll();
     }
-    public Optional<UserModel> findById(UUID id) {
+    public Optional<User> findById(UUID id) {
         return userRepository.findById(id);
     }
     @Transactional
-    public void delete(UserModel userModel) {
-        userRepository.delete(userModel );
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 }

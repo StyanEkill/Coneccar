@@ -12,8 +12,7 @@ public class ConeccarApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ConeccarApplication.class, args);
 	}
-
-	@GetMapping("/")
+	@GetMapping("/coneccar")
 	public String index(){
 		return "Hello World";
 	}

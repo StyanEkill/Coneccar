@@ -1,43 +1,27 @@
-package com.api.Coneccar.model;
+package com.api.Coneccar.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
-import java.io.Serializable;
-import java.util.UUID;
+public class UsuarioDto {
 
-@Entity
-@Table(name = "TB_USUARIO")
-public class UserModel implements Serializable {
-    private static final long serialVersionID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @Column(nullable = false, length = 30)
+    @NotBlank
+    @Size(min = 2, max = 30)
     private String name;
-
-    @Column(nullable = false, unique = true, length = 11)
+    @NotBlank
+    @CPF
     private String cpf;
-
-    @Column(nullable = false, unique = true, length = 30)
+    @NotBlank
+    @Email
     private String email;
-
-    @Column(nullable = false, length = 20)
+    @NotBlank
     private String password;
-
-    @Column(nullable = false, length = 3)
+    @NotBlank
     private String age;
-
-    @Column(nullable = false, length = 60)
+    @NotBlank
     private String address;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -83,7 +67,4 @@ public class UserModel implements Serializable {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
