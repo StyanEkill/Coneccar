@@ -1,4 +1,4 @@
-package com.api.Coneccar.dtos;
+package com.api.Coneccar.dtos.usuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

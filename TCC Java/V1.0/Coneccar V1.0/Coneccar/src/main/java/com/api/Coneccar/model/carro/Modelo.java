@@ -1,24 +1,22 @@
-package com.api.Coneccar.model;
+package com.api.Coneccar.model.carro;
 
 import jakarta.persistence.*;
-import org.springframework.jdbc.core.SqlReturnType;
 
 import java.util.List;
 
 @Entity
-@Table(name = "CarroModelo")
-public class CarroModelo {
+@Table(name = "Modelo")
+public class Modelo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "carroModelos")
-    private List<Carro> carro;
-
     @Column(nullable = false, length = 30)
     private String nome;
 
+    @OneToMany(mappedBy = "modelo")
+    private List<CarroRelacionamento> carroRelacionamentos;
 
     public int getId() {
         return id;
@@ -36,10 +34,4 @@ public class CarroModelo {
         this.nome = nome;
     }
 
-    public List<Carro> getCarro() {
-        return carro;
-    }
-    public void setCarro(List<Carro> carro) {
-        this.carro = carro;
-    }
 }

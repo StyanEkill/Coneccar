@@ -1,7 +1,7 @@
-package com.api.Coneccar.services;
+package com.api.Coneccar.services.usuario;
 
-import com.api.Coneccar.model.Usuario;
-import com.api.Coneccar.repositories.UsuarioRepository;
+import com.api.Coneccar.model.usuario.Usuario;
+import com.api.Coneccar.repositories.usuario.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

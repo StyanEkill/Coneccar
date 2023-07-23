@@ -1,6 +1,4 @@
-package com.api.Coneccar.dtos;
-import com.api.Coneccar.model.CarroModelo;
-import jakarta.persistence.Id;
+package com.api.Coneccar.dtos.carro;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -12,9 +10,6 @@ public class CarroDto {
 
     @NotBlank
     private String fabricante;
-
-    @NotBlank
-    private CarroModelo carroModelos;
 
     @NotBlank
     private String ano;
@@ -43,11 +38,4 @@ public class CarroDto {
         this.ano = ano;
     }
 
-    public CarroModelo getCarroModelos() {
-        return carroModelos;
-    }
-
-    public void setCarroModelos(CarroModelo carroModelos) {
-        this.carroModelos = carroModelos;
-    }
 }

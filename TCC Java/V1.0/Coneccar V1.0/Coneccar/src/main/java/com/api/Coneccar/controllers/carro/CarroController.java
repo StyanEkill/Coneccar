@@ -1,11 +1,9 @@
-package com.api.Coneccar.controllers;
+package com.api.Coneccar.controllers.carro;
 
 
-import com.api.Coneccar.dtos.CarroDto;
-import com.api.Coneccar.dtos.UsuarioDto;
-import com.api.Coneccar.model.Carro;
-import com.api.Coneccar.model.Usuario;
-import com.api.Coneccar.services.CarroService;
+import com.api.Coneccar.dtos.carro.CarroDto;
+import com.api.Coneccar.model.carro.Carro;
+import com.api.Coneccar.services.carro.CarroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;

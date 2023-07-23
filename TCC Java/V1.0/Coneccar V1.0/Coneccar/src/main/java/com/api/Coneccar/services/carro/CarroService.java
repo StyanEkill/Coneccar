@@ -1,7 +1,7 @@
-package com.api.Coneccar.services;
+package com.api.Coneccar.services.carro;
 
-import com.api.Coneccar.model.Carro;
-import com.api.Coneccar.repositories.CarroRepository;
+import com.api.Coneccar.model.carro.Carro;
+import com.api.Coneccar.repositories.carro.CarroRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

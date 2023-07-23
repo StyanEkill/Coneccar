@@ -1,6 +1,6 @@
-package com.api.Coneccar.repositories;
+package com.api.Coneccar.repositories.usuario;
 
-import com.api.Coneccar.model.Usuario;
+import com.api.Coneccar.model.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

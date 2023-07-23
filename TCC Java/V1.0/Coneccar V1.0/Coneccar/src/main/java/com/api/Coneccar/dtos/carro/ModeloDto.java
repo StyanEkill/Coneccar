@@ -1,8 +1,8 @@
-package com.api.Coneccar.dtos;
+package com.api.Coneccar.dtos.carro;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class CarroModeloDto {
+public class ModeloDto {
 
     @NotBlank
     private String nome;

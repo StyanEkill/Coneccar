@@ -1,8 +1,8 @@
-package com.api.Coneccar.controllers;
+package com.api.Coneccar.controllers.usuario;
 
-import com.api.Coneccar.dtos.UsuarioDto;
-import com.api.Coneccar.model.Usuario;
-import com.api.Coneccar.services.UsuarioService;
+import com.api.Coneccar.dtos.usuario.UsuarioDto;
+import com.api.Coneccar.model.usuario.Usuario;
+import com.api.Coneccar.services.usuario.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)

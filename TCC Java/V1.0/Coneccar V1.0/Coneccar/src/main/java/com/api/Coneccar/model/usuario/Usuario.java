@@ -1,4 +1,4 @@
-package com.api.Coneccar.model;
+package com.api.Coneccar.model.usuario;
 
 import jakarta.persistence.*;
 
