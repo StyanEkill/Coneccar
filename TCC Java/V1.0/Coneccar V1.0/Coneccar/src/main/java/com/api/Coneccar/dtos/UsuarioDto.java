@@ -9,7 +9,7 @@ public class UsuarioDto {
 
     @NotBlank
     @Size(min = 2, max = 30)
-    private String name;
+    private String nome;
     @NotBlank
     @CPF
     private String cpf;
@@ -17,18 +17,18 @@ public class UsuarioDto {
     @Email
     private String email;
     @NotBlank
-    private String password;
+    private String senha;
     @NotBlank
-    private String age;
+    private String idade;
     @NotBlank
-    private String address;
+    private String endereco;
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -47,24 +47,27 @@ public class UsuarioDto {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public String getAge() {
-        return age;
+    public String getIdade() {
+        return idade;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setIdade(String idade) {
+        this.idade = idade;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEndereco() {
+        return endereco;
     }
 
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 }

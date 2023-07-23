@@ -3,15 +3,14 @@ package com.api.Coneccar.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Usuario")
-public class User implements Serializable {
+public class Usuario implements Serializable {
     private static final long serialVersionID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(nullable = false, length = 30)
     private String nome;
@@ -31,11 +30,11 @@ public class User implements Serializable {
     @Column(nullable = false, length = 60)
     private String endereco;
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 

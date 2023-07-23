@@ -4,14 +4,16 @@ package com.api.Coneccar.controllers;
 import com.api.Coneccar.dtos.CarroDto;
 import com.api.Coneccar.dtos.UsuarioDto;
 import com.api.Coneccar.model.Carro;
-import com.api.Coneccar.model.User;
+import com.api.Coneccar.model.Usuario;
 import com.api.Coneccar.services.CarroService;
-import com.api.Coneccar.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -25,10 +27,43 @@ public class CarroController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveUser(@RequestBody @Valid CarroDto carroDto){
+    public ResponseEntity<Object> saveCarro(@RequestBody @Valid CarroDto carroDto){
         var carroModel = new Carro();
         BeanUtils.copyProperties(carroDto, carroModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(carroService.save(carroModel));
+    }
+    @GetMapping
+    public ResponseEntity<List<Carro>> getAllCarros(){
+        return ResponseEntity.status(HttpStatus.OK).body(carroService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneCarro(@PathVariable(value = "id") int id){
+        Optional<Carro> carroModelOptional = carroService.findById(id);
+        if (!carroModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carro não encontrado");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(carroModelOptional.get());
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteCarro(@PathVariable(value = "id") int id){
+        Optional<Carro> carroModelOptional = carroService.findById(id);
+        if (!carroModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carro não encontrado");
+        }
+        carroService.delete(carroModelOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("O carro foi deletado");
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateUser(@PathVariable(value = "id") int id, @RequestBody @Valid CarroDto carroDtoDto){
+        Optional<Carro> carroModelOptional = carroService.findById(id);
+        if (!carroModelOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Carro não encontrado");
+        }
+        var carroModel = new Carro();
+        BeanUtils.copyProperties(carroDtoDto, carroModel);
+        carroModel.setId(carroModelOptional.get().getId());
+        return  ResponseEntity.status(HttpStatus.OK).body(carroService.save(carroModel));
     }
 
 

@@ -1,38 +1,37 @@
 package com.api.Coneccar.services;
 
-import com.api.Coneccar.model.User;
+import com.api.Coneccar.model.Usuario;
 import com.api.Coneccar.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UsuarioService {
-    final UsuarioRepository userRepository;
-    public UsuarioService(UsuarioRepository userRepository) {
-        this.userRepository = userRepository;
+    final UsuarioRepository usuarioRepository;
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
     }
     @Transactional
-    public User save(User user) {
-        return userRepository.save(user);
+    public Usuario save(Usuario user) {
+        return usuarioRepository.save(user);
     }
     public boolean existsByCpf(String cpf) {
-        return userRepository.existsByCpf(cpf);
+        return usuarioRepository.existsByCpf(cpf);
     }
     public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
+        return usuarioRepository.existsByEmail(email);
     }
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<Usuario> findAll() {
+        return usuarioRepository.findAll();
     }
-    public Optional<User> findById(UUID id) {
-        return userRepository.findById(id);
+    public Optional<Usuario> findById(int id) {
+        return usuarioRepository.findById(id);
     }
     @Transactional
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void delete(Usuario user) {
+        usuarioRepository.delete(user);
     }
 }

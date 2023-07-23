@@ -3,33 +3,32 @@ package com.api.Coneccar.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Carro")
 public class Carro implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(nullable = false, length = 30)
     private String nome;
 
     @Column(nullable = false, length = 30)
-    private String versao;
+    private String fabricante;
 
     @Column(nullable = false, length = 30)
-    private String marca;
+    private String modelo;
 
     @Column(nullable = false, length = 4)
     private String ano;
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,20 +40,19 @@ public class Carro implements Serializable {
         this.nome = nome;
     }
 
-    public String getVersao() {
-        return versao;
+    public String getFabricante() {
+        return fabricante;
     }
 
-    public void setVersao(String versao) {
-        this.versao = versao;
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getModelo() {
+        return modelo;
     }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getAno() {
