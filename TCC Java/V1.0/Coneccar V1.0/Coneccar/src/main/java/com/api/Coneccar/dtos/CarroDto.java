@@ -1,15 +1,11 @@
 package com.api.Coneccar.dtos;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import com.api.Coneccar.model.CarroModelo;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.Normalized;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class CarroDto {
+
     @NotBlank
     @Size(min = 2, max = 30)
     private String nome;
@@ -18,7 +14,7 @@ public class CarroDto {
     private String fabricante;
 
     @NotBlank
-    private String modelo;
+    private CarroModelo carroModelos;
 
     @NotBlank
     private String ano;
@@ -39,19 +35,19 @@ public class CarroDto {
         this.fabricante = fabricante;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public String getAno() {
         return ano;
     }
 
     public void setAno(String ano) {
         this.ano = ano;
+    }
+
+    public CarroModelo getCarroModelos() {
+        return carroModelos;
+    }
+
+    public void setCarroModelos(CarroModelo carroModelos) {
+        this.carroModelos = carroModelos;
     }
 }
