@@ -37,7 +37,7 @@ public class Mecanica {
     private String direcao;
 
     @OneToMany(mappedBy = "mecanica")
-    private List<CarroRelacionamento> carroRelacionamentos;
+    private List<Modelo> modelos;
 
     public int getId() {
         return id;

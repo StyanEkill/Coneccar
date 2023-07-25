@@ -4,16 +4,15 @@ import com.api.Coneccar.model.carro.Carro;
 import com.api.Coneccar.model.carro.Mecanica;
 import com.api.Coneccar.model.carro.Modelo;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class CarroRelacionamentoDto {
-
+    @NotNull
     private Carro carro;
 
+    @NotNull
     private Modelo modelo;
 
-    private Mecanica mecanica;
 
     @JsonProperty("idCarro")
     private void unpackNestedCarro(Integer idCarro) {
@@ -26,13 +25,6 @@ public class CarroRelacionamentoDto {
         this.modelo = new Modelo();
         modelo.setId(idModelo);
     }
-
-    @JsonProperty("idMecanica")
-    private void unpackNestedMecanica(Integer idMecanica) {
-        this.mecanica  = new Mecanica();
-        mecanica.setId(idMecanica);
-    }
-
 
     public Carro getCarro() {
         return carro;
@@ -50,11 +42,4 @@ public class CarroRelacionamentoDto {
         this.modelo = modelo;
     }
 
-    public Mecanica getMecanica() {
-        return mecanica;
-    }
-
-    public void setMecanica(Mecanica mecanica) {
-        this.mecanica = mecanica;
-    }
 }

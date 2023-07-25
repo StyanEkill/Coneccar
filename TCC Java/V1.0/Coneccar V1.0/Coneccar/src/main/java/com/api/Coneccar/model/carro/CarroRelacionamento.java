@@ -18,10 +18,6 @@ public class CarroRelacionamento {
     @JoinColumn(name = "idModelo",nullable = false)
     private Modelo modelo;
 
-    @ManyToOne
-    @JoinColumn(name = "idMecanica",nullable = false)
-    private Mecanica mecanica;
-
     public int getId() {
         return id;
     }
@@ -46,11 +42,4 @@ public class CarroRelacionamento {
         this.modelo = modelo;
     }
 
-    public Mecanica getMecanica() {
-        return mecanica;
-    }
-
-    public void setMecanica(Mecanica mecanica) {
-        this.mecanica = mecanica;
-    }
 }

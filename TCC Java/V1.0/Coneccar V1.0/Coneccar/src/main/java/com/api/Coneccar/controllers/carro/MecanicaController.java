@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/coneccar/mecanico")
+@RequestMapping("/coneccar/mecanica")
 public class MecanicaController {
 
     final MecanicaService mecanicaService;

@@ -18,6 +18,10 @@ public class Modelo {
     @OneToMany(mappedBy = "modelo")
     private List<CarroRelacionamento> carroRelacionamentos;
 
+    @ManyToOne
+    @JoinColumn(name = "idMecanica",nullable = false)
+    private Mecanica mecanica;
+
     public int getId() {
         return id;
     }
