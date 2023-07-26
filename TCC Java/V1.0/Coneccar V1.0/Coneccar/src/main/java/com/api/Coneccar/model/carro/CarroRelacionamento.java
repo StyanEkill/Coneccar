@@ -41,5 +41,4 @@ public class CarroRelacionamento {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
-
 }

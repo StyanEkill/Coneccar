@@ -38,4 +38,19 @@ public class Modelo {
         this.nome = nome;
     }
 
+    public List<CarroRelacionamento> getCarroRelacionamentos() {
+        return carroRelacionamentos;
+    }
+
+    public void setCarroRelacionamentos(List<CarroRelacionamento> carroRelacionamentos) {
+        this.carroRelacionamentos = carroRelacionamentos;
+    }
+
+    public Mecanica getMecanica() {
+        return mecanica;
+    }
+
+    public void setMecanica(Mecanica mecanica) {
+        this.mecanica = mecanica;
+    }
 }

@@ -110,4 +110,12 @@ public class Mecanica {
     public void setDirecao(String direcao) {
         this.direcao = direcao;
     }
+
+    public List<Modelo> getModelos() {
+        return modelos;
+    }
+
+    public void setModelos(List<Modelo> modelos) {
+        this.modelos = modelos;
+    }
 }
