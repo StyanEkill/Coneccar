@@ -5,18 +5,22 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Tipo")
-public class Tipo {
+@Table(name = "TipoCategoria")
+public class TipoCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "tipo")
-    private List<TipoCategoria> tipoCategorias;
+    @ManyToOne
+    @JoinColumn(name = "idTipo",nullable = false)
+    private Tipo tipo;
 
     @Column(nullable = false, length = 30)
     private String descricao;
+
+    @OneToMany(mappedBy = "tipoCategorias")
+    private List<Categoria> categorias;
 
     public int getId() {
         return id;
@@ -26,6 +30,14 @@ public class Tipo {
         this.id = id;
     }
 
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -33,5 +45,4 @@ public class Tipo {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
 }

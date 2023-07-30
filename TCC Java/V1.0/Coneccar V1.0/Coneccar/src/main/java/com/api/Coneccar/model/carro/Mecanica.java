@@ -32,7 +32,7 @@ public class Mecanica {
 
     @Column(nullable = false, length = 30)
     private String cambio;
-    
+
     @Column(nullable = false, length = 30)
     private String direcao;
 
@@ -111,11 +111,5 @@ public class Mecanica {
         this.direcao = direcao;
     }
 
-    public List<Modelo> getModelos() {
-        return modelos;
-    }
 
-    public void setModelos(List<Modelo> modelos) {
-        this.modelos = modelos;
-    }
 }

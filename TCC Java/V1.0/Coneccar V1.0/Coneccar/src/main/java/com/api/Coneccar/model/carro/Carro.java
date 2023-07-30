@@ -3,7 +3,7 @@ package com.api.Coneccar.model.carro;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
+
 
 @Entity
 @Table(name = "Carro")
@@ -14,16 +14,13 @@ public class Carro implements Serializable {
     private int id;
 
     @Column(nullable = false, length = 30)
-    private String nome;
+    private String descricao;
 
     @Column(nullable = false, length = 30)
     private String fabricante;
 
     @Column(nullable = false, length = 4)
     private String ano;
-
-    @OneToMany(mappedBy = "carro")
-    private List<CarroRelacionamento> carroRelacionamentos;
 
     public int getId() {
         return id;
@@ -33,12 +30,12 @@ public class Carro implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getFabricante() {
