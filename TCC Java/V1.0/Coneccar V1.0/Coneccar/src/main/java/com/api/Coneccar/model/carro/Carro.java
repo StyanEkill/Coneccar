@@ -22,8 +22,12 @@ public class Carro implements Serializable {
     @Column(nullable = false, length = 4)
     private String ano;
 
-    @OneToMany(mappedBy = "carro")
-    private List<CarroRelacionamento> carroRelacionamentos;
+    /*@OneToMany(mappedBy = "carro")
+    private List<CarroRelacionamento> carroRelacionamentos;*/
+
+    @ManyToOne
+    @JoinColumn(name = "idModelo",nullable = false)
+    private Modelo modelo;
 
     public int getId() {
         return id;
@@ -57,4 +61,11 @@ public class Carro implements Serializable {
         this.ano = ano;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
 }

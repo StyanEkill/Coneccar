@@ -1,5 +1,6 @@
 package com.api.Coneccar.model.carro;
 
+import com.api.Coneccar.model.bases.Categoria;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,11 +17,18 @@ public class Modelo {
     private String nome;
 
     @OneToMany(mappedBy = "modelo")
-    private List<CarroRelacionamento> carroRelacionamentos;
-
+    private List<Carro> carros;
     @ManyToOne
     @JoinColumn(name = "idMecanica",nullable = false)
     private Mecanica mecanica;
+
+    @ManyToOne
+    @JoinColumn(name = "idSeguranca",nullable = false)
+    private Seguranca seguranca;
+
+    @ManyToOne
+    @JoinColumn(name = "idConforto",nullable = false)
+    private Conforto conforto;
 
     public int getId() {
         return id;
@@ -38,19 +46,27 @@ public class Modelo {
         this.nome = nome;
     }
 
-    public List<CarroRelacionamento> getCarroRelacionamentos() {
-        return carroRelacionamentos;
-    }
-
-    public void setCarroRelacionamentos(List<CarroRelacionamento> carroRelacionamentos) {
-        this.carroRelacionamentos = carroRelacionamentos;
-    }
-
     public Mecanica getMecanica() {
         return mecanica;
     }
 
     public void setMecanica(Mecanica mecanica) {
         this.mecanica = mecanica;
+    }
+
+    public Seguranca getSeguranca() {
+        return seguranca;
+    }
+
+    public void setSeguranca(Seguranca seguranca) {
+        this.seguranca = seguranca;
+    }
+
+    public Conforto getConforto() {
+        return conforto;
+    }
+
+    public void setConforto(Conforto conforto) {
+        this.conforto = conforto;
     }
 }

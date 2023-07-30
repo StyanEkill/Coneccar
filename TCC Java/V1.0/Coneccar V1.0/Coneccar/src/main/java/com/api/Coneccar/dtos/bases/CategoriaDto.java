@@ -7,24 +7,16 @@ import jakarta.validation.constraints.NotNull;
 
 public class CategoriaDto {
 
-    @NotNull
-    private Tipo tipo;
-
     @NotBlank
     private String descricao;
 
+    @NotNull
+    private Tipo tipo;
+
     @JsonProperty("idTipo")
-    private void unpackNestedModelo(Integer idTipo) {
+    private void unpackNestedTipo(Integer idTipo) {
         this.tipo = new Tipo();
         tipo.setId(idTipo);
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
     }
 
     public String getDescricao() {
@@ -33,5 +25,13 @@ public class CategoriaDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 }

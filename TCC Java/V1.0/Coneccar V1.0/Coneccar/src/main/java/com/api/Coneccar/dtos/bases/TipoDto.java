@@ -1,10 +1,6 @@
 package com.api.Coneccar.dtos.bases;
 
-import com.api.Coneccar.model.bases.Categoria;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-
-import java.util.List;
 
 
 public class TipoDto {

@@ -1,5 +1,8 @@
 package com.api.Coneccar.dtos.carro;
+import com.api.Coneccar.model.carro.Modelo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class CarroDto {
@@ -8,11 +11,20 @@ public class CarroDto {
     @Size(min = 2, max = 30)
     private String nome;
 
+    @NotNull
+    private Modelo modelo;
+
     @NotBlank
     private String fabricante;
 
     @NotBlank
     private String ano;
+
+    @JsonProperty("idModelo")
+    private void unpackNestedModelo(Integer idModelo) {
+        this.modelo = new Modelo();
+        modelo.setId(idModelo);
+    }
 
     public String getNome() {
         return nome;
@@ -38,4 +50,11 @@ public class CarroDto {
         this.ano = ano;
     }
 
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
 }
