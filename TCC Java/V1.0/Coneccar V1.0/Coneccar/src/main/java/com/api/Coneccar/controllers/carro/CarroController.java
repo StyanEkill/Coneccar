@@ -1,7 +1,6 @@
 package com.api.Coneccar.controllers.carro;
 
 
-import com.api.Coneccar.dtos.carro.CarroDto;
 import com.api.Coneccar.model.carro.Carro;
 import com.api.Coneccar.services.carro.CarroService;
 import jakarta.validation.Valid;
