@@ -1,7 +1,5 @@
 package com.api.Coneccar.model.bases;
 
-import com.api.Coneccar.model.carro.Modelo;
-import com.api.Coneccar.model.carro.ModeloConfig;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,14 +16,11 @@ public class Categoria {
     @JoinColumn(name = "idTipoCategoria",nullable = false)
     private TipoCategoria tipoCategorias;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 60)
     private String descricao;
 
-    @OneToOne(mappedBy = "categorias")
-    private boolean valorCategoria;
-
-    @ManyToMany(mappedBy = "categorias")
-    List<Modelo> modelos;
+    @OneToMany(mappedBy = "categoria")
+    List<ModeloCategoria> modeloCategorias;
 
     public int getId() {
         return id;
@@ -51,11 +46,6 @@ public class Categoria {
         this.tipoCategorias = tipoCategorias;
     }
 
-    public boolean isValorCategoria() {
-        return valorCategoria;
-    }
 
-    public void setValorCategoria(boolean valorCategoria) {
-        this.valorCategoria = valorCategoria;
-    }
+
 }

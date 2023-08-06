@@ -1,6 +1,6 @@
 package com.api.Coneccar.model.carro;
 
-import com.api.Coneccar.model.bases.Categoria;
+import com.api.Coneccar.model.bases.ModeloCategoria;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,12 +20,20 @@ public class Modelo {
     @JoinColumn(name = "idMecanica",nullable = false)
     private Mecanica mecanica;
 
-    @ManyToMany
-    @JoinTable(name = "modeloCategoria",
-            joinColumns = @JoinColumn(name = "idModelo"),
-            inverseJoinColumns = @JoinColumn(name = "idCategoria"))
-    @JoinColumn(name = "valorCategoria",nullable = false)
-    List<Categoria> categorias;
+    @OneToMany(mappedBy = "modelo")
+    List<ModeloCategoria> modeloCategorias;
+
+    @ManyToOne
+    @JoinColumn(name = "idCarro",nullable = false)
+    private Carro carro;
+
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
 
     public int getId() {
         return id;
@@ -43,4 +51,11 @@ public class Modelo {
         this.descricao = descricao;
     }
 
+    public Mecanica getMecanica() {
+        return mecanica;
+    }
+
+    public void setMecanica(Mecanica mecanica) {
+        this.mecanica = mecanica;
+    }
 }
