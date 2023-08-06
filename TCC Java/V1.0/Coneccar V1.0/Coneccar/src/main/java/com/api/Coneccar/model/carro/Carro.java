@@ -1,5 +1,6 @@
 package com.api.Coneccar.model.carro;
 
+import com.api.Coneccar.model.bases.ModeloCategoria;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

@@ -1,7 +1,10 @@
 package com.api.Coneccar.model.bases;
 
+import com.api.Coneccar.model.carro.Carro;
 import com.api.Coneccar.model.carro.Modelo;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -54,4 +57,6 @@ public class ModeloCategoria {
     public void setValorCategoria(boolean valorCategoria) {
         this.valorCategoria = valorCategoria;
     }
+
+
 }
