@@ -1,5 +1,7 @@
 package com.api.Coneccar.model.usuario;
 
+import com.api.Coneccar.model.bases.Endereco;
+import com.api.Coneccar.model.carro.Carro;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -27,8 +29,9 @@ public class Usuario implements Serializable {
     @Column(nullable = false, length = 3)
     private String idade;
 
-    @Column(nullable = false, length = 60)
-    private String endereco;
+    @ManyToOne
+    @JoinColumn(name = "idEndereco", nullable = false)
+    private Endereco endereco;
 
     public int getId() {
         return id;
@@ -78,11 +81,11 @@ public class Usuario implements Serializable {
         this.idade = idade;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 }

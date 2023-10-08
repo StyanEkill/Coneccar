@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroAc">
+    tools:context=".Ac.CadPessoalAc">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -62,7 +62,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edEmail3"
+                    android:id="@+id/edNome"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="12dp"
@@ -84,7 +84,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/cpf"
+                    android:id="@+id/edCpf"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="12dp"
@@ -142,29 +142,6 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Endereço"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edEndereco"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/edittext"
-                    android:ems="10"
-                    android:hint="Informe o seu endereço"
-                    android:inputType="text"
-                    android:padding="12dp"
-                    android:textColor="#707070"
-                    android:textSize="18sp" />
-
-                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -196,7 +173,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edConfirmSenha"
+                    android:id="@+id/edConfirmSenhha"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="12dp"
@@ -210,7 +187,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnCadastro"
+                    android:id="@+id/btnCadPessoal"
                     style="@android:style/Widget.Button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

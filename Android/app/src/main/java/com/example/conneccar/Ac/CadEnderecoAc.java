@@ -1,14 +1,15 @@
-package com.example.conneccar;
+package com.example.conneccar.Ac;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class HomeAc extends AppCompatActivity {
+import com.example.conneccar.R;
+
+public class CadEnderecoAc extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_cad_endereco);
     }
 }

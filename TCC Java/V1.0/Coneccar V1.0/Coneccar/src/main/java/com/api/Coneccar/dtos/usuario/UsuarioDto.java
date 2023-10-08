@@ -1,7 +1,9 @@
 package com.api.Coneccar.dtos.usuario;
 
+import com.api.Coneccar.model.bases.Endereco;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -20,8 +22,8 @@ public class UsuarioDto {
     private String senha;
     @NotBlank
     private String idade;
-    @NotBlank
-    private String endereco;
+    @NotNull
+    private Endereco endereco;
 
     public String getNome() {
         return nome;
@@ -63,11 +65,11 @@ public class UsuarioDto {
         this.idade = idade;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 }

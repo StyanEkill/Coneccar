@@ -1,4 +1,4 @@
-package com.example.conneccar;
+package com.example.conneccar.Ac;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.conneccar.R;
 
 public class RedirectAc extends AppCompatActivity {
 
@@ -22,8 +24,8 @@ public class RedirectAc extends AppCompatActivity {
         btLogin = findViewById(R.id.btLogin);
         btCadastro = findViewById(R.id.btCadastro);
 
-        Intent LoginIntent = new Intent(getApplicationContext(),LoginAc.class);
-        Intent Cadastrontent = new Intent(getApplicationContext(),CadastroAc.class);
+        Intent LoginIntent = new Intent(getApplicationContext(), LoginAc.class);
+        Intent Cadastrontent = new Intent(getApplicationContext(), CadPessoalAc.class);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
