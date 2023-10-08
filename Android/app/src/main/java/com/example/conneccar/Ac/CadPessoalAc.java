@@ -13,6 +13,7 @@ import com.example.conneccar.services.UsuarioService;
 
 public class CadPessoalAc extends AppCompatActivity {
 
+    EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
     Button btCadastro;
 
     @Override
@@ -22,6 +23,12 @@ public class CadPessoalAc extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        edNome = findViewById(R.id.edNome);
+        edCpf = findViewById(R.id.edCpf);
+        edEmail = findViewById(R.id.edEmail);
+        edIdade = findViewById(R.id.edIdade);
+        edSenha = findViewById(R.id.edSenha);
+        edConfirmSenhha = findViewById(R.id.edConfirmSenha);
         btCadastro = findViewById(R.id.btnCadPessoal);
 
         btCadastro.setOnClickListener(new View.OnClickListener() {
@@ -29,7 +36,12 @@ public class CadPessoalAc extends AppCompatActivity {
             public void onClick(View view) {
                 UsuarioService usuarioService = new UsuarioService(CadPessoalAc.this);
 
-                usuarioService.usuarioCadastro(new UsuarioService.VolleyResponseListener() {
+                usuarioService.usuarioCadastro(edNome.getText().toString()
+                        ,edCpf.getText().toString()
+                        ,edEmail.getText().toString()
+                        ,edIdade.getText().toString()
+                        ,edSenha.getText().toString()
+                        ,new UsuarioService.VolleyResponseListener() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(CadPessoalAc.this, "ERRO", Toast.LENGTH_SHORT).show();

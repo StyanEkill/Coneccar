@@ -44,19 +44,19 @@ public class UsuarioService {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
-                    String nomeUsuario = "";
+                    String emailUsuario = "";
                     String senhaUsuario = "";
                     try {
 
                         JSONObject usuario = response.getJSONObject(i);
-                        nomeUsuario = usuario.getString("nome");
+                        emailUsuario = usuario.getString("email");
                         senhaUsuario = usuario.getString("senha");
 
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
 
-                    if (usuario.equals(nomeUsuario) && senha.equals(senhaUsuario)){
+                    if (usuario.equals(emailUsuario) && senha.equals(senhaUsuario)){
 
                         i = response.length();
                         volleyResponseListener.onResponse(usuario+senha);
@@ -78,16 +78,23 @@ public class UsuarioService {
         MySingleton.getInstance(context).addToRequestQueue(request);
     }
 
-    public void usuarioCadastro(VolleyResponseListener volleyResponseListener){
+    public void usuarioCadastro(String nome
+            ,String senha
+            ,String cpf
+            ,String email
+            ,String idade
+            ,VolleyResponseListener volleyResponseListener){
 
         try {
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("nome", "Michele");
-            jsonBody.put("cpf", "28536264829");
-            jsonBody.put("email", "michele@gmail.com.br");
-            jsonBody.put("senha", "123456");
-            jsonBody.put("idade", "30");
-            jsonBody.put("idendereco", "1");
+            jsonBody.put("nome", nome);
+            jsonBody.put("cpf", cpf);
+            jsonBody.put("email", email);
+            jsonBody.put("senha", senha);
+            jsonBody.put("idade", idade);
+            JSONObject enderecoPut = new JSONObject();
+            /*enderecoPut.put("id", 1);
+            jsonBody.put("endereco", enderecoPut);*/
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, API_CONECCAR, new Response.Listener<String>() {
