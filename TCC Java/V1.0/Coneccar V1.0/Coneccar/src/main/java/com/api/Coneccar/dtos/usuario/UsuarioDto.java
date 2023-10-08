@@ -1,6 +1,7 @@
 package com.api.Coneccar.dtos.usuario;
 
 import com.api.Coneccar.model.bases.Endereco;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,6 +25,11 @@ public class UsuarioDto {
     private String idade;
     @NotNull
     private Endereco endereco;
+    @JsonProperty("idEndereco")
+    private void unpackNestedCategoria(Integer idEndereco) {
+        this.endereco = new Endereco();
+        endereco.setId(idEndereco);
+    }
 
     public String getNome() {
         return nome;
