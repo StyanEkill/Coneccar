@@ -1,11 +1,13 @@
 package com.example.conneccar.services;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +28,7 @@ public class UsuarioService {
     public static final String API_CONECCAR = "http://192.168.1.8:8080/coneccar/usuario";
 
     Context context;
+    JSONArray array;
 
     public UsuarioService(Context context) {
         this.context = context;
@@ -33,7 +36,7 @@ public class UsuarioService {
 
     public interface VolleyResponseListener{
         void onError(String message);
-        void onResponse(Object response);
+        void onResponse(JSONArray response);
     }
 
     public void usuarioLogin(String usuario, String senha,VolleyResponseListener volleyResponseListener){
@@ -59,7 +62,16 @@ public class UsuarioService {
                     if (usuario.equals(emailUsuario) && senha.equals(senhaUsuario)){
 
                         i = response.length();
-                        volleyResponseListener.onResponse(usuario+senha);
+                        array = new JSONArray();
+                        try {
+                            JSONObject j = new JSONObject(usuario);
+                            JSONObject k = new JSONObject(senha);
+                            array.put(j);
+                            array.put(k);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        volleyResponseListener.onResponse(array);
                         //Toast.makeText(context, "Usuario ou senha incorretos", Toast.LENGTH_SHORT).show();
 
                     } else {
@@ -77,14 +89,9 @@ public class UsuarioService {
 
         MySingleton.getInstance(context).addToRequestQueue(request);
     }
+    public void usuarioCadastro(String nome,String cpf,String email,String idade,String senha,VolleyResponseListener volleyResponseListener){
 
-    public void usuarioCadastro(String nome
-            ,String senha
-            ,String cpf
-            ,String email
-            ,String idade
-            ,VolleyResponseListener volleyResponseListener){
-
+        String url = API_CONECCAR;
         try {
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("nome", nome);
@@ -92,55 +99,66 @@ public class UsuarioService {
             jsonBody.put("email", email);
             jsonBody.put("senha", senha);
             jsonBody.put("idade", idade);
-            JSONObject enderecoPut = new JSONObject();
-            /*enderecoPut.put("id", 1);
+
+            /*JSONObject enderecoPut = new JSONObject();
+            enderecoPut.put("id", 1);
             jsonBody.put("endereco", enderecoPut);*/
+
             final String requestBody = jsonBody.toString();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, API_CONECCAR, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Log.i("VOLLEY", response);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("VOLLEY", error.toString());
-                }
-            }) {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
 
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                        return null;
+                StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        array = new JSONArray();
+                        try {
+                            JSONObject aux = new JSONObject(response);
+                            array.put(aux);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        volleyResponseListener.onResponse(array);
                     }
-                }
-
-                @Override
-                protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                    String responseString = "";
-                    if (response != null) {
-                        responseString = String.valueOf(response.statusCode);
-                        // can get more details such as response.headers
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        volleyResponseListener.onError(error.toString());
                     }
-                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                }
-            };
+                }) {
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
 
-            MySingleton.getInstance(context).addToRequestQueue(stringRequest);
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        try {
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                            return null;
+                        }
+                    }
+                    @Override
+                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                        String responseString = "";
+                        JSONArray array;
+                        try {
+                            String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+                            return Response.success(json,HttpHeaderParser.parseCacheHeaders(response));
+                        } catch (Exception e) {
+                            return Response.error(new ParseError());
+                        }
+                    }
+                };
+                MySingleton.getInstance(context).addToRequestQueue(request);
 
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
+            } catch(JSONException e){
+                e.printStackTrace();
+            }
 
     }
+
 
 
 

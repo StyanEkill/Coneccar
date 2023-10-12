@@ -11,6 +11,10 @@ import android.widget.Toast;
 import com.example.conneccar.R;
 import com.example.conneccar.services.UsuarioService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CadPessoalAc extends AppCompatActivity {
 
     EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
@@ -36,22 +40,38 @@ public class CadPessoalAc extends AppCompatActivity {
             public void onClick(View view) {
                 UsuarioService usuarioService = new UsuarioService(CadPessoalAc.this);
 
-                usuarioService.usuarioCadastro(edNome.getText().toString()
-                        ,edCpf.getText().toString()
-                        ,edEmail.getText().toString()
-                        ,edIdade.getText().toString()
-                        ,edSenha.getText().toString()
-                        ,new UsuarioService.VolleyResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(CadPessoalAc.this, "ERRO", Toast.LENGTH_SHORT).show();
-                    }
+                if(edSenha.getText().toString().equals(edConfirmSenhha.getText().toString())) {
 
-                    @Override
-                    public void onResponse(Object response) {
-                        Toast.makeText(CadPessoalAc.this, "FOI", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    usuarioService.usuarioCadastro(edNome.getText().toString(),edCpf.getText().toString(),edEmail.getText().toString(),edIdade.getText().toString(),edSenha.getText().toString()
+                            , new UsuarioService.VolleyResponseListener() {
+                                @Override
+
+                                public void onError(String message) {
+                                    Toast.makeText(CadPessoalAc.this, message, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onResponse(JSONArray response) {
+                                    for (int i = 0; i < response.length(); i++) {
+                                        String id = "";
+
+                                        try {
+                                            JSONObject user = response.getJSONObject(0);
+                                            id = user.getString("id");
+                                            System.out.println(id);
+                                        } catch (Exception e) {
+                                            throw new RuntimeException(e);
+                                        }
+
+                                    }
+
+                                    System.out.println(response);
+                                    //Toast.makeText(CadPessoalAc.this, ""+ response.toString(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                } else {
+                    Toast.makeText(CadPessoalAc.this, "As senhas não conferem", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
