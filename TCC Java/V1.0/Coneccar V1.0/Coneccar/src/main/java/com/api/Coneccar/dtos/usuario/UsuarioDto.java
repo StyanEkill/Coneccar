@@ -23,13 +23,14 @@ public class UsuarioDto {
     private String senha;
     @NotBlank
     private String idade;
-    @NotNull
+
+   /* @NotNull
     private Endereco endereco;
     @JsonProperty("idEndereco")
     private void unpackNestedCategoria(Integer idEndereco) {
         this.endereco = new Endereco();
         endereco.setId(idEndereco);
-    }
+    }*/
 
     public String getNome() {
         return nome;
@@ -69,13 +70,5 @@ public class UsuarioDto {
 
     public void setIdade(String idade) {
         this.idade = idade;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 }

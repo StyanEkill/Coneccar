@@ -5,6 +5,7 @@ import com.api.Coneccar.model.carro.Carro;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuario")
@@ -29,9 +30,8 @@ public class Usuario implements Serializable {
     @Column(nullable = false, length = 3)
     private String idade;
 
-    @ManyToOne
-    @JoinColumn(name = "idEndereco", nullable = false)
-    private Endereco endereco;
+    @OneToMany(mappedBy = "usuario")
+    List<Endereco> enderecos;
 
     public int getId() {
         return id;
@@ -81,11 +81,5 @@ public class Usuario implements Serializable {
         this.idade = idade;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
 }

@@ -29,8 +29,9 @@ public class Endereco implements Serializable {
     private String complemento;
     @Column(nullable = false, length = 20)
     private String servico;
-    @OneToMany(mappedBy = "endereco")
-    List<Usuario> usuarios;
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario usuario;
 
     public int getId() {
         return id;
@@ -102,5 +103,13 @@ public class Endereco implements Serializable {
 
     public void setServico(String servico) {
         this.servico = servico;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
