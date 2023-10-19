@@ -1,0 +1,54 @@
+-- POST -- 
+
+/*try {
+                    JSONObject jsonBody = new JSONObject();
+                    jsonBody.put("nome", "Daniel");
+                    jsonBody.put("cpf", "49938897800");
+                    jsonBody.put("email", "daniel@gmail.com.br");
+                    jsonBody.put("senha", "123456");
+                    jsonBody.put("idade", "20");
+                    jsonBody.put("endereco", "rua dos bobos");
+                    final String requestBody = jsonBody.toString();
+
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.i("VOLLEY", response);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("VOLLEY", error.toString());
+                        }
+                    }) {
+                        @Override
+                        public String getBodyContentType() {
+                            return "application/json; charset=utf-8";
+                        }
+
+                        @Override
+                        public byte[] getBody() throws AuthFailureError {
+                            try {
+                                return requestBody == null ? null : requestBody.getBytes("utf-8");
+                            } catch (UnsupportedEncodingException uee) {
+                                VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                                return null;
+                            }
+                        }
+
+                        @Override
+                        protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                            String responseString = "";
+                            if (response != null) {
+                                responseString = String.valueOf(response.statusCode);
+                                // can get more details such as response.headers
+                            }
+                            return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                        }
+                    };
+
+                    MySingleton.getInstance(MainActivity.this).addToRequestQueue(stringRequest);
+
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }*/
