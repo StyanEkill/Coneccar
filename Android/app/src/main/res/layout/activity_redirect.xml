@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Seja bem-vindo\nao ConeCcar"
+        android:text="Seja bem-vindo\nao Coneccar"
         android:textColor="@color/black"
         android:textSize="35sp"
         android:layout_marginTop="80dp"

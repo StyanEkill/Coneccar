@@ -70,7 +70,7 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="Informe o CEP"
-            android:inputType="textPersonName"
+            android:inputType="textPostalAddress"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />
@@ -159,7 +159,7 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="Informe a rua"
-            android:inputType="number"
+            android:inputType="text"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />
@@ -181,7 +181,7 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="Informe o número"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />
@@ -203,7 +203,7 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="Infome o complemento"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />

@@ -2,23 +2,23 @@ package com.example.conneccar.Ac;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.conneccar.R;
 import com.example.conneccar.services.UsuarioService;
+import com.example.conneccar.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CadPessoalAc extends AppCompatActivity {
 
     EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
-    Button btCadastro;
+    Button btCadPessoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,10 @@ public class CadPessoalAc extends AppCompatActivity {
         edIdade = findViewById(R.id.edIdade);
         edSenha = findViewById(R.id.edSenha);
         edConfirmSenhha = findViewById(R.id.edConfirmSenha);
-        btCadastro = findViewById(R.id.btnCadPessoal);
+        btCadPessoal = findViewById(R.id.btnCadPessoal);
 
-        btCadastro.setOnClickListener(new View.OnClickListener() {
+        btCadPessoal.setOnClickListener(new View.OnClickListener() {
+            Intent cadEndereco = new Intent(getApplicationContext(),CadEnderecoAc.class);
             @Override
             public void onClick(View view) {
                 UsuarioService usuarioService = new UsuarioService(CadPessoalAc.this);
@@ -52,8 +53,9 @@ public class CadPessoalAc extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(JSONArray response) {
+                                    String id = null;
                                     for (int i = 0; i < response.length(); i++) {
-                                        String id = "";
+                                        id = "";
 
                                         try {
                                             JSONObject user = response.getJSONObject(0);
@@ -66,7 +68,9 @@ public class CadPessoalAc extends AppCompatActivity {
                                     }
 
                                     System.out.println(response);
-                                    //Toast.makeText(CadPessoalAc.this, ""+ response.toString(), Toast.LENGTH_LONG).show();
+                                    cadEndereco.putExtra("id", id);
+                                    startActivity(cadEndereco);
+                                    finish();
                                 }
                             });
                 } else {

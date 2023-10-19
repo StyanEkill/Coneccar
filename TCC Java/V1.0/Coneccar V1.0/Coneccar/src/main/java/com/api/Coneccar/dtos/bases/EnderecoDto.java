@@ -1,43 +1,46 @@
-package com.api.Coneccar.model.bases;
+package com.api.Coneccar.dtos.bases;
 
 import com.api.Coneccar.model.usuario.Usuario;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import java.io.Serializable;
+public class EnderecoDto {
 
-@Entity
-@Table(name = "Endereco")
-public class Endereco implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(nullable = false, length = 9)
+    @NotBlank
+    @Size(max = 11)
     private String cep;
-    @Column(nullable = false, length = 2)
+
+    @NotBlank
+    @Size(max = 2)
     private String uf;
-    @Column(nullable = false, length = 30)
+
+    @NotBlank
     private String cidade;
-    @Column(nullable = false, length = 30)
+
+    @NotBlank
     private String bairro;
-    @Column(nullable = false, length = 50)
+
+    @NotBlank
     private String rua;
-    @Column(nullable = false, length = 10)
+
+    @NotBlank
     private String numero;
-    @Column(nullable = true, length = 50)
+
     private String complemento;
-    @Column(nullable = false, length = 20)
+
+    @NotBlank
     private String servico;
-    @ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+
+    @NotNull
     private Usuario usuario;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    @JsonProperty("idUsuario")
+    private void unpackNestedUsuario(Integer idUsuario) {
+        this.usuario = new Usuario();
+        usuario.setId(idUsuario);
     }
 
     public String getCep() {
