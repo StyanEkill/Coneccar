@@ -23,6 +23,9 @@ public class EnderecoController {
 
     @PostMapping
     public ResponseEntity<Object> saveEndereco(@RequestBody @Valid EnderecoDto enderecoDto) {
+        if(enderecoService.existsByUsuario(enderecoDto.getUsuario())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("O usuário já possui um endereço cadastrado");
+        }
         var enderecoModel = new Endereco();
         BeanUtils.copyProperties(enderecoDto, enderecoModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(enderecoService.save(enderecoModel));

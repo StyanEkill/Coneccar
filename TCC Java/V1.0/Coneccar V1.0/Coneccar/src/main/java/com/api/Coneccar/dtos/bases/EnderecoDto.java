@@ -2,7 +2,6 @@ package com.api.Coneccar.dtos.bases;
 
 import com.api.Coneccar.model.usuario.Usuario;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,7 +14,7 @@ public class EnderecoDto {
 
     @NotBlank
     @Size(max = 2)
-    private String uf;
+    private String UF;
 
     @NotBlank
     private String cidade;
@@ -51,12 +50,12 @@ public class EnderecoDto {
         this.cep = cep;
     }
 
-    public String getUf() {
-        return uf;
+    public String getUF() {
+        return UF;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setUF(String UF) {
+        this.UF = UF;
     }
 
     public String getCidade() {

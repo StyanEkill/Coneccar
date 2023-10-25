@@ -15,7 +15,7 @@ public class Endereco implements Serializable {
     @Column(nullable = false, length = 9)
     private String cep;
     @Column(nullable = false, length = 2)
-    private String uf;
+    private String UF;
     @Column(nullable = false, length = 30)
     private String cidade;
     @Column(nullable = false, length = 30)
@@ -48,12 +48,12 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
-    public String getUf() {
-        return uf;
+    public String getUF() {
+        return UF;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setUF(String UF) {
+        this.UF = UF;
     }
 
     public String getCidade() {
