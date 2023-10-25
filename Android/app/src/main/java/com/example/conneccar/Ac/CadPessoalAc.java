@@ -67,7 +67,6 @@ public class CadPessoalAc extends AppCompatActivity {
 
                                     }
 
-                                    System.out.println(response);
                                     cadEndereco.putExtra("id", id);
                                     startActivity(cadEndereco);
                                     finish();

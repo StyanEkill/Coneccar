@@ -10,7 +10,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.example.conneccar.MySingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 public class EnderecoService {
 
     public static final String API_CONECCAR = "http://192.168.1.8:8080/coneccar/endereco";
+    public static final String API_BRASILAPI = "https://brasilapi.com.br/api/cep/v1/";
 
     Context context;
     JSONArray array;
@@ -34,23 +38,49 @@ public class EnderecoService {
         void onResponse(JSONArray response);
     }
 
+    public interface VolleyResponseListenerObject{
+        void onError(String message);
+        void onResponse(JSONObject response);
+    }
+
+    public void getCep(String cep, VolleyResponseListenerObject volleyResponseListenerObject){
+
+        String url = API_BRASILAPI + cep;
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                volleyResponseListenerObject.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponseListenerObject.onError(error+"");
+            }
+        });
+
+        MySingleton.getInstance(context).addToRequestQueue(request);
+
+    }
+
+
     public void enderecoCadastro(int idUsuario, String cep, String UF, String cidade, String bairro, String rua, String numero, String complemento, VolleyResponseListener volleyResponseListener){
         String url = API_CONECCAR;
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("idUsuario",idUsuario);
             jsonBody.put("cep",cep);
-            jsonBody.put("UF",UF);
+            jsonBody.put("uf",UF);
             jsonBody.put("cidade",cidade);
             jsonBody.put("bairro",bairro);
             jsonBody.put("rua",rua);
             jsonBody.put("numero",numero);
             jsonBody.put("complemento",complemento);
             jsonBody.put("servico","correios");
+            jsonBody.put("idUsuario",idUsuario);
 
             final String requestBody = jsonBody.toString();
-            System.out.println(requestBody);
 
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
@@ -98,6 +128,8 @@ public class EnderecoService {
                 }
 
             };
+
+            MySingleton.getInstance(context).addToRequestQueue(request);
 
         } catch (JSONException e) {
             throw new RuntimeException(e);
