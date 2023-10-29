@@ -13,6 +13,7 @@ import com.example.conneccar.services.UsuarioService;
 import com.example.conneccar.R;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class LoginAc extends AppCompatActivity {
 
@@ -38,22 +39,41 @@ public class LoginAc extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String email = edEmail.getText().toString();
+                String senha = edSenha.getText().toString();
+
                 UsuarioService usuarioService = new UsuarioService(LoginAc.this);
 
-                usuarioService.usuarioLogin(edEmail.getText().toString(), edSenha.getText().toString(), new UsuarioService.VolleyResponseListener() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(LoginAc.this, message, Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        System.out.println(response);
-                        startActivity(HomeIntent);
-                    }
-                });
+                if(validarInfo(email,senha) == true) {
 
+                    usuarioService.usuarioLogin(email, senha, new UsuarioService.VolleyResponseListenerObject() {
+                        @Override
+                        public void onError(String message) {
+                            Toast.makeText(LoginAc.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            System.out.println(response);
+                            startActivity(HomeIntent);
+                        }
+                    });
+                }
             }
         });
 
+    }
+
+    private boolean validarInfo(String email, String senha) {
+        if(email.length() == 0) {
+            edEmail.requestFocus();
+            edEmail.setError("O campo não pode estar vazio");
+            return false;
+        } else if(senha.length() == 0) {
+            edSenha.requestFocus();
+            edSenha.setError("O campo não pode estar vazio");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

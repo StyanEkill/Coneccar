@@ -20,6 +20,7 @@ public class CadPessoalAc extends AppCompatActivity {
     EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
     Button btCadPessoal;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,50 +36,103 @@ public class CadPessoalAc extends AppCompatActivity {
         edConfirmSenhha = findViewById(R.id.edConfirmSenha);
         btCadPessoal = findViewById(R.id.btnCadPessoal);
 
+
         btCadPessoal.setOnClickListener(new View.OnClickListener() {
+
             Intent cadEndereco = new Intent(getApplicationContext(),CadEnderecoAc.class);
             @Override
             public void onClick(View view) {
+
+                String nome = edNome.getText().toString();
+                String cpf = edCpf.getText().toString();
+                String email = edEmail.getText().toString();
+                String idade = edIdade.getText().toString();
+                String senha = edSenha.getText().toString();
+                String confirmSenhha = edConfirmSenhha.getText().toString();
+
                 UsuarioService usuarioService = new UsuarioService(CadPessoalAc.this);
 
-                if(edSenha.getText().toString().equals(edConfirmSenhha.getText().toString())) {
+                if(validarInfo(nome,cpf,email,idade,senha, confirmSenhha) == true) {
 
-                    usuarioService.usuarioCadastro(edNome.getText().toString(),edCpf.getText().toString(),edEmail.getText().toString(),edIdade.getText().toString(),edSenha.getText().toString()
-                            , new UsuarioService.VolleyResponseListener() {
-                                @Override
+                        usuarioService.usuarioCadastro(nome, cpf, email, idade, senha
+                                , new UsuarioService.VolleyResponseListener() {
+                                    @Override
 
-                                public void onError(String message) {
-                                    Toast.makeText(CadPessoalAc.this, message, Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onResponse(JSONArray response) {
-                                    String id = null;
-                                    for (int i = 0; i < response.length(); i++) {
-                                        id = "";
-
-                                        try {
-                                            JSONObject user = response.getJSONObject(0);
-                                            id = user.getString("id");
-                                            System.out.println(id);
-                                        } catch (Exception e) {
-                                            throw new RuntimeException(e);
-                                        }
-
+                                    public void onError(String message) {
+                                        System.out.println(message);
+                                        Toast.makeText(CadPessoalAc.this, message, Toast.LENGTH_SHORT).show();
                                     }
 
-                                    cadEndereco.putExtra("id", id);
-                                    startActivity(cadEndereco);
-                                    finish();
-                                }
-                            });
-                } else {
-                    Toast.makeText(CadPessoalAc.this, "As senhas não conferem", Toast.LENGTH_SHORT).show();
-                }
+                                    @Override
+                                    public void onResponse(JSONArray response) {
+                                        String id = null;
+                                        for (int i = 0; i < response.length(); i++) {
+                                            id = "";
+
+                                            try {
+                                                JSONObject user = response.getJSONObject(0);
+                                                id = user.getString("id");
+                                                System.out.println(id);
+                                            } catch (Exception e) {
+                                                throw new RuntimeException(e);
+                                            }
+
+                                        }
+
+                                        cadEndereco.putExtra("id", id);
+                                        startActivity(cadEndereco);
+                                        finish();
+                                    }
+                                });
+
+                } 
 
             }
         });
 
-
     }
+
+    private boolean validarInfo(String nome, String cpf, String email, String idade, String senha, String confSenha) {
+        if(nome.length() == 0){
+            edNome.requestFocus();
+            edNome.setError("O campo não pode estar vazio");
+            return false;
+        } /*else if (!nome.matches("[a-zA-Z]+")) {
+            edNome.requestFocus();
+            edNome.setError("Insira somente valores alfabéticos");
+            return false;
+        }*/ else if(cpf.length() == 0){
+            edCpf.requestFocus();
+            edCpf.setError("O campo não pode estar vazio");
+            return false;
+        } else if (cpf.length() != 11) {
+            edCpf.requestFocus();
+            edCpf.setError("Insira um CPF valido");
+            return false;
+        }
+        else if(email.length() == 0){
+            edEmail.requestFocus();
+            edEmail.setError("O campo não pode estar vazio");
+            return false;
+        } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+            edEmail.requestFocus();
+            edEmail.setError("Insira um email valido");
+            return false;
+        } else if(idade.length() == 0) {
+            edIdade.requestFocus();
+            edIdade.setError("O campo não pode estar vazio");
+            return false;
+        } else if(senha.length() < 8){
+            edSenha.requestFocus();
+            edSenha.setError("Minimo de 8 caracteres requeridos");
+            return false;
+        } else if (!senha.equals(confSenha)) {
+            edConfirmSenhha.requestFocus();
+            edConfirmSenhha.setError("As senhas não conferem");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

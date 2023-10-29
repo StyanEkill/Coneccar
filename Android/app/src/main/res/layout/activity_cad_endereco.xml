@@ -70,10 +70,11 @@
             android:background="@drawable/edittext"
             android:ems="10"
             android:hint="Informe o CEP"
-            android:inputType="textPostalAddress"
+            android:inputType="number"
             android:padding="12dp"
             android:textColor="#707070"
             android:textSize="18sp" />
+
         <TextView
             android:id="@+id/textView11"
             android:layout_width="match_parent"

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,65 +40,134 @@ public class CadEnderecoAc extends AppCompatActivity {
         edComplemento = findViewById(R.id.edComplemento);
         btCadEndereco = findViewById(R.id.btnCadEndereco);
 
-        Intent HomeIntent = new Intent(getApplicationContext(), HomeAc.class);
+        edCep.addTextChangedListener(new TextWatcher() {
 
-        btCadEndereco.setOnClickListener(new View.OnClickListener() {
+            String uf = "";
+            String cidade = "";
+            String bairro = "";
+            String rua = "";
+
             @Override
-            public void onClick(View view) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                System.out.println(editable.toString().length());
                 EnderecoService enderecoService = new EnderecoService(CadEnderecoAc.this);
 
-                /*enderecoService.enderecoCadastro(Integer.parseInt(idUsuario), edCep.getText().toString(), edUF.getText().toString(), edCidade.getText().toString(), edBairro.getText().toString(), edRua.getText().toString(), edNumero.getText().toString(), edComplemento.getText().toString(), new EnderecoService.VolleyResponseListener() {
-                            @Override
-                            public void onError(String message) {
-                                Toast.makeText(CadEnderecoAc.this, message, Toast.LENGTH_SHORT).show();
-                            }
+                if (editable.toString().length() == 8) {
 
-                            @Override
-                            public void onResponse(JSONArray response) {
-                                startActivity(HomeIntent);
-                            }
-                        });*/
+                    enderecoService.getCep(editable.toString(), new EnderecoService.VolleyResponseListenerObject() {
 
-                enderecoService.getCep(edCep.getText().toString(), new EnderecoService.VolleyResponseListenerObject() {
-                    @Override
-                    public void onError(String message) {
-                        Toast.makeText(CadEnderecoAc.this, message, Toast.LENGTH_LONG).show();
-                    }
+                        @Override
+                        public void onError(String message) {
+                            Toast.makeText(CadEnderecoAc.this, message, Toast.LENGTH_LONG).show();
+                        }
 
-                    @Override
-                    public void onResponse(JSONObject response) {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            System.out.println(response);
+                                try {
+                                    uf = response.getString("state");
+                                    cidade = response.getString("city");
+                                    bairro = response.getString("neighborhood");
+                                    rua = response.getString("street");
+                                } catch (Exception e) {
+                                    throw new RuntimeException(e);
+                                }
 
-                        response.toString();
-
-                        String uf = null;
-                        String cidade = null;
-                        String bairro = null;
-                        String rua = null;
-                        for (int i = 0; i < response.length(); i++) {
-                            uf = "";
-                            cidade = "";
-                            bairro = "";
-                            rua = "";
-
-                            try {
-                                uf = response.getString("state");
-                                cidade = response.getString("city");
-                                bairro = response.getString("neighborhood");
-                                rua = response.getString("street");
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-
-                            Toast.makeText(CadEnderecoAc.this, rua, Toast.LENGTH_LONG).show();
+                            System.out.println(rua);
+                            edUF.setText(uf.toString());
+                            edCidade.setText(cidade.toString());
+                            edBairro.setText(bairro.toString());
+                            edRua.setText(rua.toString());
 
                         }
-                    }
-                });
+                    });
 
+                } else {
+                    edUF.setText("");
+                    edCidade.setText("");
+                    edBairro.setText("");
+                    edRua.setText("");
+                }
             }
         });
 
 
+        btCadEndereco.setOnClickListener(new View.OnClickListener() {
+
+            Intent HomeIntent = new Intent(getApplicationContext(), HomeAc.class);
+
+            @Override
+            public void onClick(View view) {
+
+                String cep = edCep.getText().toString();
+                String uf = edUF.getText().toString();
+                String cidade = edCidade.getText().toString();
+                String bairro = edBairro.getText().toString();
+                String rua = edRua.getText().toString();
+                String numero = edNumero.getText().toString();
+                String complemento = edComplemento.getText().toString();
+
+                EnderecoService enderecoService = new EnderecoService(CadEnderecoAc.this);
+
+                if(validarInfo(cep,uf,cidade,bairro,rua,numero) == true) {
+
+                    enderecoService.enderecoCadastro(Integer.parseInt(idUsuario), cep, uf, cidade, bairro, rua, numero, complemento, new EnderecoService.VolleyResponseListener() {
+                        @Override
+                        public void onError(String message) {
+                            Toast.makeText(CadEnderecoAc.this, message, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            startActivity(HomeIntent);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private boolean validarInfo(String cep, String uf, String cidade, String bairro, String rua, String numero) {
+
+        if(cep.length() == 0){
+            edCep.requestFocus();
+            edCep.setError("O campo não pode estar vazio");
+            return false;
+        } else if (cep.length() < 8 || cep.length() > 8) {
+            edCep.requestFocus();
+            edCep.setError("CEP invalido");
+            return false;
+        } else if (uf.length() == 0) {
+            edUF.requestFocus();
+            edUF.setError("O campo não pode estar vazio");
+            return false;
+        } else if (cidade.length() == 0) {
+            edCidade.requestFocus();
+            edCidade.setError("O campo não pode estar vazio");
+            return false;
+        } else if (bairro.length() == 0) {
+            edBairro.requestFocus();
+            edBairro.setError("O campo não pode estar vazio");
+            return false;
+        } else if (rua.length() == 0) {
+            edRua.requestFocus();
+            edRua.setError("O campo não pode estar vazio");
+            return false;
+        } else if (numero.length() == 0) {
+            edNumero.requestFocus();
+            edNumero.setError("O campo não pode estar vazio");
+            return false;
+        } else {
+            return true;
+        }
 
     }
 }

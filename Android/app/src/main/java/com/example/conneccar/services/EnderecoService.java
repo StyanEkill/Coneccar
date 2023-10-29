@@ -63,8 +63,6 @@ public class EnderecoService {
         MySingleton.getInstance(context).addToRequestQueue(request);
 
     }
-
-
     public void enderecoCadastro(int idUsuario, String cep, String UF, String cidade, String bairro, String rua, String numero, String complemento, VolleyResponseListener volleyResponseListener){
         String url = API_CONECCAR;
 

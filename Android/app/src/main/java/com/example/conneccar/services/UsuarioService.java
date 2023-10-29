@@ -37,15 +37,32 @@ public class UsuarioService {
         void onResponse(JSONArray response);
     }
 
-    public void usuarioLogin(String usuario, String senha,VolleyResponseListener volleyResponseListener){
+    public interface VolleyResponseListenerObject{
+        void onError(String message);
+        void onResponse(JSONObject response);
+    }
+
+    public void usuarioLogin(String edEmail, String edSenha,VolleyResponseListenerObject volleyResponseListenerObject){
 
         String url = API_CONECCAR;
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    String emailUsuario = "";
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+
+                        JSONObject usuario = response.getJSONObject(i);
+                        String email = usuario.getString("email");
+                        String senha = usuario.getString("senha");
+
+                        if (email.equals(edEmail) && senha.equals(edSenha)){
+                            i = response.length();
+                            volleyResponseListenerObject.onResponse(usuario);
+                        } else if (i == response.length() - 1){
+                            Toast.makeText(context, "Email ou senha não encontrados", Toast.LENGTH_SHORT).show();
+                        }
+                    /*String emailUsuario = "";
                     String senhaUsuario = "";
                     try {
 
@@ -74,14 +91,16 @@ public class UsuarioService {
 
                     } else {
                         volleyResponseListener.onError(usuario+senha);
+                    }*/
                     }
+                } catch (JSONException e){
+                    System.out.println(e);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "Algo deu errado", Toast.LENGTH_SHORT).show();
-                volleyResponseListener.onError("Algo deu errado");
+                volleyResponseListenerObject.onError("Algo deu errado");
             }
         });
 
@@ -104,10 +123,10 @@ public class UsuarioService {
 
             final String requestBody = jsonBody.toString();
 
-
                 StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println("resposta: "+response);
                         array = new JSONArray();
                         try {
                             JSONObject aux = new JSONObject(response);
