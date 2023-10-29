@@ -20,6 +20,7 @@ public class UsuarioDto {
     @Email
     private String email;
     @NotBlank
+    @Size(min = 8, max = 30)
     private String senha;
     @NotBlank
     private String idade;
