@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conneccar.R;
@@ -122,7 +126,7 @@ public class CadEnderecoAc extends AppCompatActivity {
                     enderecoService.enderecoCadastro(Integer.parseInt(idUsuario), cep, uf, cidade, bairro, rua, numero, complemento, new EnderecoService.VolleyResponseListener() {
                         @Override
                         public void onError(String message) {
-                            Toast.makeText(CadEnderecoAc.this, message, Toast.LENGTH_SHORT).show();
+                            showToast(message);
                         }
 
                         @Override
@@ -170,4 +174,19 @@ public class CadEnderecoAc extends AppCompatActivity {
         }
 
     }
+
+    private void showToast(String texto){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.base_1));
+        TextView tvToast = layout.findViewById(R.id.tvToast);
+        tvToast.setText(texto);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.TOP,0,100);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+
+    }
+
 }

@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conneccar.services.UsuarioService;
@@ -36,7 +40,6 @@ public class CadPessoalAc extends AppCompatActivity {
         edConfirmSenhha = findViewById(R.id.edConfirmSenha);
         btCadPessoal = findViewById(R.id.btnCadPessoal);
 
-
         btCadPessoal.setOnClickListener(new View.OnClickListener() {
 
             Intent cadEndereco = new Intent(getApplicationContext(),CadEnderecoAc.class);
@@ -60,7 +63,7 @@ public class CadPessoalAc extends AppCompatActivity {
 
                                     public void onError(String message) {
                                         System.out.println(message);
-                                        Toast.makeText(CadPessoalAc.this, message, Toast.LENGTH_SHORT).show();
+                                        showToast(message);
                                     }
 
                                     @Override
@@ -133,6 +136,20 @@ public class CadPessoalAc extends AppCompatActivity {
         } else {
             return true;
         }
+    }
+
+    private void showToast(String texto){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.base_1));
+        TextView tvToast = layout.findViewById(R.id.tvToast);
+        tvToast.setText(texto);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.TOP,0,100);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+
     }
 
 }

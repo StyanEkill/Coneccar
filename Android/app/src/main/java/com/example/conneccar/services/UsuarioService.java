@@ -60,7 +60,7 @@ public class UsuarioService {
                             i = response.length();
                             volleyResponseListenerObject.onResponse(usuario);
                         } else if (i == response.length() - 1){
-                            Toast.makeText(context, "Email ou senha não encontrados", Toast.LENGTH_SHORT).show();
+                            volleyResponseListenerObject.onError("Email ou senha não encontrados");
                         }
                     /*String emailUsuario = "";
                     String senhaUsuario = "";
