@@ -9,7 +9,7 @@ insert into tipocategoria (idtipo, descricao) values
 (1,'Som'),
 (1,'Bancos'),
 (1,'Janelas'),
-(1,'Janelas');
+(1,'Outros');
 
 insert into categoria (idtipocategoria, descricao) values
 (1, 'airbag motorista'),
@@ -61,16 +61,9 @@ insert into modelocategoria (idcategoria,idmodelo,valorcategoria) values
 (11,1,false),
 (18,1,false);
 
-insert into endereco(cep,uf,cidade,bairro,rua,numero,complemento,servico,idUsuario) values
-('13914114','SP','Jaguariúna','Jardim Sylvio Rinaldi II','Rua Antonio Gilberto Rosin','154','casa','correios',1);
+insert into direcao (idusuario, descricao, valorSeguranca, valorConforto, valorEconomia) values
+(1,'Segurança',5,0,0),
+(1,'Conforto',0,5,0),
+(1,'Economia',0,0,5);
 
-insert into usuario(nome,cpf,email,senha,idade) values
-('Michele','28536264829','michele@gmail.com.br','123456','30');
-
-
-select cr.descricao ,m.descricao, c.descricao, mc.valorcategoria from modelo md 
-left Join modelocategoria mc on mc.idmodelo = md.id
-left join categoria c on c.id = mc.id
-left join modelo m on m.id = mc.idmodelo
-left join carro cr on cr.id = m.idcarro
 

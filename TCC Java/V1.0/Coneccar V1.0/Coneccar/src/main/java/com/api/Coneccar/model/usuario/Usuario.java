@@ -1,6 +1,7 @@
 package com.api.Coneccar.model.usuario;
 
 import com.api.Coneccar.model.bases.Endereco;
+import com.api.Coneccar.model.bases.ModeloCategoria;
 import com.api.Coneccar.model.carro.Carro;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -33,6 +34,9 @@ public class Usuario implements Serializable {
 
     @OneToMany(mappedBy = "usuario")
     List<Endereco> enderecos;
+
+    @OneToMany(mappedBy = "usuario")
+    List<Direcao> direcoes;
 
     public int getId() {
         return id;
