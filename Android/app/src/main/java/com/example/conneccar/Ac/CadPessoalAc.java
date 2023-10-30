@@ -23,7 +23,7 @@ public class CadPessoalAc extends AppCompatActivity {
 
     EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
     Button btCadPessoal;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
