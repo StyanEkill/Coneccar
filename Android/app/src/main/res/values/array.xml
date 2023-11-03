@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="font_sizes">
+        <item>Muito pouco importante</item>
+        <item>Pouco importante</item>
+        <item>Neutro</item>
+        <item>Importante</item>
+        <item>Muito importante</item>
+    </string-array>
+
+    <string-array name="generos_sizes">
+        <item>Masculino</item>
+        <item>Feminio</item>
+        <item>Outro</item>
+    </string-array>
+
+</resources>

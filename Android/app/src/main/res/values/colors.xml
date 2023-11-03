@@ -11,4 +11,5 @@
     <color name="dark_cyan_green">#00a86b</color>
     <color name="cyan_green">#00d286</color>
     <color name="loding_green">#31c187</color>
+    <color name="redirect">#068251</color>
 </resources>

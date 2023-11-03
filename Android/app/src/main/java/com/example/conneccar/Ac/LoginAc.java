@@ -52,7 +52,7 @@ public class LoginAc extends AppCompatActivity {
                     usuarioService.usuarioLogin(email, senha, new UsuarioService.VolleyResponseListenerObject() {
                         @Override
                         public void onError(String message) {
-                            showToast(message);
+                            showToastError(message);
                             //Toast.makeText(LoginAc.this, message, Toast.LENGTH_SHORT).show();
                         }
                         @Override
@@ -81,7 +81,7 @@ public class LoginAc extends AppCompatActivity {
         }
     }
 
-    private void showToast(String texto){
+    private void showToastError(String texto){
         LayoutInflater layoutInflater = getLayoutInflater();
         View layout = layoutInflater.inflate(R.layout.custom_toast,(ViewGroup)findViewById(R.id.base_1));
         TextView tvToast = layout.findViewById(R.id.tvToast);

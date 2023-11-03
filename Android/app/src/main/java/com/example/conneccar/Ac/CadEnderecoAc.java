@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conneccar.R;
+import com.example.conneccar.services.DirecaoService;
 import com.example.conneccar.services.EnderecoService;
 
 import org.json.JSONArray;
@@ -106,7 +107,7 @@ public class CadEnderecoAc extends AppCompatActivity {
 
         btCadEndereco.setOnClickListener(new View.OnClickListener() {
 
-            Intent HomeIntent = new Intent(getApplicationContext(), HomeAc.class);
+            Intent redDirecaoIntent = new Intent(getApplicationContext(), DirecaoRedirect.class);
 
             @Override
             public void onClick(View view) {
@@ -131,7 +132,7 @@ public class CadEnderecoAc extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONArray response) {
-                            startActivity(HomeIntent);
+                            startActivity(redDirecaoIntent);
                         }
                     });
                 }

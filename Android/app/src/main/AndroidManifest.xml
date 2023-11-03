@@ -17,6 +17,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Ac.DirecaoRedirect"
+            android:exported="false" />
+        <activity
+            android:name=".Ac.EnderecoRedirect"
+            android:exported="false" />
+        <activity
+            android:name=".Ac.CadDirecaoAc"
+            android:exported="false" />
+        <activity
             android:name=".Ac.RedirectAc"
             android:exported="false" />
         <activity

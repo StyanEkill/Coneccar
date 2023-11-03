@@ -8,20 +8,24 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.conneccar.services.UsuarioService;
 import com.example.conneccar.R;
+import com.example.conneccar.services.UsuarioService;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CadPessoalAc extends AppCompatActivity {
 
-    EditText edNome, edCpf, edEmail, edIdade, edSenha, edConfirmSenhha;
+    EditText edNome, edCpf, edEmail, edIdade,edSenha, edConfirmSenhha;
+    Spinner spGenero;
     Button btCadPessoal;
 
     @Override
@@ -35,13 +39,19 @@ public class CadPessoalAc extends AppCompatActivity {
         edCpf = findViewById(R.id.edCpf);
         edEmail = findViewById(R.id.edEmail);
         edIdade = findViewById(R.id.edIdade);
+        spGenero = findViewById(R.id.spGenero);
         edSenha = findViewById(R.id.edSenha);
         edConfirmSenhha = findViewById(R.id.edConfirmSenha);
         btCadPessoal = findViewById(R.id.btnCadPessoal);
 
+        String[] textSizes = getResources().getStringArray(R.array.generos_sizes);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,textSizes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spGenero.setAdapter(adapter);
+
         btCadPessoal.setOnClickListener(new View.OnClickListener() {
 
-            Intent cadEndereco = new Intent(getApplicationContext(),CadEnderecoAc.class);
+            Intent redEdereco = new Intent(getApplicationContext(),EnderecoRedirect.class);
             @Override
             public void onClick(View view) {
 
@@ -49,14 +59,15 @@ public class CadPessoalAc extends AppCompatActivity {
                 String cpf = edCpf.getText().toString();
                 String email = edEmail.getText().toString();
                 String idade = edIdade.getText().toString();
+                String genero = spGenero.toString();
                 String senha = edSenha.getText().toString();
                 String confirmSenhha = edConfirmSenhha.getText().toString();
 
                 UsuarioService usuarioService = new UsuarioService(CadPessoalAc.this);
 
-                if(validarInfo(nome,cpf,email,idade,senha, confirmSenhha) == true) {
+                if(validarInfo(nome,cpf,email,idade,genero,senha, confirmSenhha) == true) {
 
-                        usuarioService.usuarioCadastro(nome, cpf, email, idade, senha
+                        usuarioService.usuarioCadastro(nome, cpf, email, idade, genero, senha
                                 , new UsuarioService.VolleyResponseListener() {
                                     @Override
 
@@ -81,8 +92,8 @@ public class CadPessoalAc extends AppCompatActivity {
 
                                         }
 
-                                        cadEndereco.putExtra("id", id);
-                                        startActivity(cadEndereco);
+                                        redEdereco.putExtra("id", id);
+                                        startActivity(redEdereco);
                                         finish();
                                     }
                                 });
@@ -92,7 +103,7 @@ public class CadPessoalAc extends AppCompatActivity {
 
     }
 
-    private boolean validarInfo(String nome, String cpf, String email, String idade, String senha, String confSenha) {
+    private boolean validarInfo(String nome, String cpf, String email, String idade, String genero, String senha, String confSenha) {
         if(nome.length() == 0){
             edNome.requestFocus();
             edNome.setError("O campo não pode estar vazio");

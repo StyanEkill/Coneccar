@@ -16,11 +16,11 @@ public class Endereco implements Serializable {
     private String cep;
     @Column(nullable = false, length = 2)
     private String UF;
-    @Column(nullable = false, length = 30)
-    private String cidade;
-    @Column(nullable = false, length = 30)
-    private String bairro;
     @Column(nullable = false, length = 50)
+    private String cidade;
+    @Column(nullable = false, length = 100)
+    private String bairro;
+    @Column(nullable = false, length = 100)
     private String rua;
     @Column(nullable = false, length = 10)
     private String numero;

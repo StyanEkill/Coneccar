@@ -5,6 +5,7 @@ import com.api.Coneccar.model.bases.ModeloCategoria;
 import com.api.Coneccar.model.carro.Carro;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,11 +33,20 @@ public class Usuario implements Serializable {
     @Column(nullable = false, length = 3)
     private String idade;
 
+    @Getter
+    @Column(nullable = false, length = 20)
+    private String genero;
+
     @OneToMany(mappedBy = "usuario")
     List<Endereco> enderecos;
 
     @OneToMany(mappedBy = "usuario")
     List<Direcao> direcoes;
+
+    @Getter
+    @ManyToOne
+    @JoinColumn(name = "idImagePerfil", nullable = true)
+    private ImageUsuario imageUsuario;
 
     public int getId() {
         return id;
@@ -86,4 +96,11 @@ public class Usuario implements Serializable {
         this.idade = idade;
     }
 
+    public void setImageUsuario(ImageUsuario imageUsuario) {
+        this.imageUsuario = imageUsuario;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
 }

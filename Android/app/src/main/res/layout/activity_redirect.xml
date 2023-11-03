@@ -15,8 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/girl"
+        android:paddingBottom="280dp"
+        android:src="@drawable/redirect"
         />
 
     <ImageView
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bottom_white" />
+        android:src="@drawable/bottom_white"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
-        android:text="Descubra Seu Caminho,\nConecte-se com Coneccar"
+        android:text="Descubra seu caminho,\nconecte-se com Coneccar!"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
