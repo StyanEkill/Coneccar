@@ -106,7 +106,7 @@ public class UsuarioService {
 
         MySingleton.getInstance(context).addToRequestQueue(request);
     }
-    public void usuarioCadastro(String nome,String cpf,String email,String idade,String senha,VolleyResponseListener volleyResponseListener){
+    public void usuarioCadastro(String nome,String cpf,String email,String idade,String genero,String senha,VolleyResponseListener volleyResponseListener){
 
         String url = API_CONECCAR;
         try {
@@ -116,6 +116,7 @@ public class UsuarioService {
             jsonBody.put("email", email);
             jsonBody.put("senha", senha);
             jsonBody.put("idade", idade);
+            jsonBody.put("genero", genero);
 
             /*JSONObject enderecoPut = new JSONObject();
             enderecoPut.put("id", 1);
